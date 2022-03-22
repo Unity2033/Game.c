@@ -2,81 +2,66 @@
 
 int main()
 {
-	
-	// 증감 연산자
-/*
-int number_1 = 10;
-int number_2 = 10;
-
-// ++가 변수 앞에 오게되면 먼저 연산을 수행한 후에 값을 증가시킵니다.
-printf("전위 증가 연산자 : %d\n", ++number_1);
-
-// --가 변수 앞에 오게되면 먼저 연산을 수행한 후에 값을 감소시킵니다.
-printf("전위 감소 연산자 : %d\n", --number_2);
-
-// 변수 뒤에 ++가 오게되면 나중에 값을 증가시키고 연산을 수행합니다.
-printf("후위 증가 연산자 : %d\n", number_1++);
-
-// 변수 뒤에 --가 오게되면 나중에 값을 감소시키고 연산을 수행합니다.
-printf("후위 감소 연산자 : %d\n", number_2--);
-
-printf("number_1의 값 : %d\n", number_1);
-printf("number_2의 값 : %d\n", number_2);
-*/
-
-// while 문
-/*
-int person = 3;
-
-while (person > 2) //
-{
-	printf("공장의 인원을 재 배치해주세요.\n");
-	scanf_s("%d", &person);
-}
-*/
-
-// do while 문
-/*
-do
-{
-	printf("조건이 틀렸지만, 실행됩니다.");
-}
-while (3 > 2);
-*/
-
-// for 문
-/*
-int value = 1;
-
-for (int i = 0; i <= 5; i++)
-{
-	printf("%d", value);
-}
-*/
-
-// 1 ~ 10까지의 합을 구해주세요.
-//int value = 0;
-
-//for (int i = 1; i <= 10; i++)
-//{
-//	value += i;
-//}
-
-//printf("1 ~ 10 까지의 합 : %d", value);
-
-// 구구단 
-	/*
-	for (int i = 1; i < 10; i++)
+	// continue 문
+    /*
+	for (int i = 1; i <= 10; i++)
 	{
-		for (int j = 1; j < 10; j++)
+		if (i % 3 == 0)
 		{
-			printf("%d * %d = %d\n", i, j, i * j);
+			continue;
 		}
 
-		printf("\n");
+		printf("%d\n", i);
 	}
 	*/
 
+	// 쉬프트 연산자
+	/*
+	int memory = 3; // 0000 0011
+
+	// 비트를 3번 오른쪽으로 이동시켰습니다.
+	printf("%d\n", memory <<= 3); // 0001 1000
+
+	// 비트를 5번 왼쪽으로 이동시켰습니다.
+	memory >>= 5;
+	
+	printf("%d", memory); // 0000 0000
+	*/
+
+	// 최대 공약수 
+	/*
+	int value1 = 16;
+	int value2 = 20;
+
+	int result = 0;
+
+	for (int i = 1; i <= value1 && i <= value2; i++)
+	{
+		if (value1 % i == 0 && value2 % i == 0)
+		{
+			result = i;
+		}
+	}
+	
+
+	printf("%d", result);
+	*/
+
+	int value = 10; 
+
+	printf("%p\n", &value);
+
+	// 포인터 변수도 자체적으로 메모리 공간을 가지고 있습니다.
+	int * ptr = &value;
+
+	// ptr  = value의 시작주소를 가리키는 것입니다.
+	// &ptr = ptr의 메모리 주소가 출력되는 거에요.
+
+	printf("%p", &ptr);
+
+	*ptr = 2000;
+
+	printf("%d", value);
 
 	return 0;
 }
