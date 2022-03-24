@@ -1,60 +1,68 @@
 #include <stdio.h>
 
+//// void : 자료형이 존재하지 않기 때문에 반환할 게 없습니다.
+//void Function(int value, int x)
+//{
+//	value = value + 4;
+//	printf("%d\n", value);
+//}
+
+int Plus(int x, int y);
+void Sub(int x, int y);
+void Mul(int x, int y);
+float Div(int x, int y);
+
 int main()
 {
-	// 포인터
+	// 상수 지시 포인터 
 	/*
-    // value라는 메모리 공간을 생성했습니다.
-	int value = 10; 
+	int value = 10;
 
-	int a = 50;
+	// 상수 지시 포인터 : 포인터로 접근해서 값을 변경할 수 없도록 상수화하는 것입니다.
+	const int * ptr = &value;
 
-	// 포인터의 크기는 4 byte입니다.
-	// CPU와 운영체제에 따라 4 ~ 8 byte의 크기를 가질 수 있습니다.
-	int * ptr = &value;
+	// value라는 값을 변경하기 위해서는 ptr 포인터가 상수 지시 포인터이기 때문에 해당 변수로 가서 메모리를 변경해야합니다.
+	value = 63;
 
-	printf("포인터 변수의 값 : %d\n", *ptr); 
-
-	ptr = &a;
-
-	* ptr = 1000;
-
-	printf("포인터 변수의 값 : %d\n", *ptr); 
-
-	printf("포인터의 크기 : %d", sizeof(ptr));
+	printf("%d\n", value);
 	*/
 
-	// 이중 포인터
-	/*
-	int x = 0;
+    // 함수
 
-	int * ptr = &x;
+	// 함수를 호출합니다.
+	printf("Plus : %d\n",Plus(10, 5));
 
-	int ** pptr = &ptr;
+	Sub(20,10);
 
-	printf("변수 x의 주소 : %p\n", &x);
-	printf("ptr의 주소 : %p\n", &ptr);
-	printf("pptr의 주소 : %p\n", &pptr);
+	Mul(1, 3);
 
-	printf("pptr의 값 : %d", **pptr);
-	*/
-
-
-	// 초기식을 설정합니다. ( int i = 0 )
-	// 조건식을 설정합니다. ( i < 5 )
-
-	/*
-	for (int i = 0; i < 5; i++)
-	{
-		for (int j = 0; j <= i; j++)
-		{
-			printf("*");
-		}
-
-		printf("\n");
-	}
-	*/
-
+	float f = Div(3, 2);
+	printf("Div : %f", f);
 
 	return 0;
 }
+
+// 반환형 - 함수이름(매개변수 x, 매개변수 y)
+int Plus(int x, int y)
+{
+	return x + y;
+}
+
+// 서로 같은 이름의 함수를 정의할 수 없습니다. 
+void Sub(int x, int y)
+{
+	printf("Sub : %d\n", x - y);
+}
+
+void Mul(int x, int y)
+{
+	printf("Mul : %d\n", x * y);
+}
+
+float Div(int x, int y)
+{
+	return (float)x / y;
+}
+
+
+
