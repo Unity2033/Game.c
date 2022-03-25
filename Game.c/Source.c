@@ -1,68 +1,81 @@
 #include <stdio.h>
 
-//// void : 자료형이 존재하지 않기 때문에 반환할 게 없습니다.
-//void Function(int value, int x)
-//{
-//	value = value + 4;
-//	printf("%d\n", value);
-//}
+// 값 교환 함수 (사용자 정의 함수)
+/*
+void Swap(int * x, int * y)
+{
+	int temp = 0;
+	temp = *x;
+	*x = *y;
+	*y = temp;
+}
+*/
 
-int Plus(int x, int y);
-void Sub(int x, int y);
-void Mul(int x, int y);
-float Div(int x, int y);
+// cosnt 매개 변수
+/*
+void Const_Funciton(const int x, const int y)
+{
+	printf("x의 값 : %d   y의 값 : %d", x, y);
+	// const 매개 변수는 값을 읽기 전용으로 설정할 때 사용합니다.
+}
+*/
 
 int main()
 {
-	// 상수 지시 포인터 
+	// 변수의 값을 교환하는 방법
 	/*
-	int value = 10;
+	int a = 10; 
+	int b = 20;
+	int c = 0;
+    
+	// 하나의 임시 메모리 공간만들어서 거기에 넣어주었다가 다시 대입할 수 있도록 해주어야 합니다.
 
-	// 상수 지시 포인터 : 포인터로 접근해서 값을 변경할 수 없도록 상수화하는 것입니다.
-	const int * ptr = &value;
+    // c[10] <- a(10)
+	c = a;
 
-	// value라는 값을 변경하기 위해서는 ptr 포인터가 상수 지시 포인터이기 때문에 해당 변수로 가서 메모리를 변경해야합니다.
-	value = 63;
+	// a[20] <- b[20]
+	a = b;
 
-	printf("%d\n", value);
+	// b[20] <- c[10]
+	b = c;
+
+	printf("a의 값 : %d b의 값 :%d", a, b);
 	*/
 
-    // 함수
+	// 참조에 의한 호출
+	/*
+	int num1 = 10;
+	int num2 = 20;
 
-	// 함수를 호출합니다.
-	printf("Plus : %d\n",Plus(10, 5));
+	Swap(&num1, &num2);
+	
+	printf("num1 = %d  num2 = %d\n", num1, num2);
+	*/
 
-	Sub(20,10);
+	// const 매개변수 함수 호출
+	/*
+	Const_Funciton(0, 0);
+	*/
 
-	Mul(1, 3);
+	// [???]-[???]-[???]
 
-	float f = Div(3, 2);
-	printf("Div : %f", f);
+	int a[10] = {0,};
+
+	// 문제
+	// a라는 배열 공간에 각각의 원소의 수에 맞는 값을 넣어주세요.
+	// ex) [0] = 0 [1] = 1
+
+	for (int i = 0; i < 10; i++)
+	{
+		a[i] = i;
+		printf("%d\n", a[i]); 
+	}
+
+
 
 	return 0;
 }
 
-// 반환형 - 함수이름(매개변수 x, 매개변수 y)
-int Plus(int x, int y)
-{
-	return x + y;
-}
-
-// 서로 같은 이름의 함수를 정의할 수 없습니다. 
-void Sub(int x, int y)
-{
-	printf("Sub : %d\n", x - y);
-}
-
-void Mul(int x, int y)
-{
-	printf("Mul : %d\n", x * y);
-}
-
-float Div(int x, int y)
-{
-	return (float)x / y;
-}
 
 
 
