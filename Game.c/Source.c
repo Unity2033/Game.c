@@ -1,77 +1,74 @@
 #include <stdio.h>
 
-// 값 교환 함수 (사용자 정의 함수)
-/*
-void Swap(int * x, int * y)
-{
-	int temp = 0;
-	temp = *x;
-	*x = *y;
-	*y = temp;
-}
-*/
-
-// cosnt 매개 변수
-/*
-void Const_Funciton(const int x, const int y)
-{
-	printf("x의 값 : %d   y의 값 : %d", x, y);
-	// const 매개 변수는 값을 읽기 전용으로 설정할 때 사용합니다.
-}
-*/
-
 int main()
 {
-	// 변수의 값을 교환하는 방법
-	/*
-	int a = 10; 
+	// 포인터 배열 
+    /*
+	int a = 10;
 	int b = 20;
-	int c = 0;
+	int c = 15;
+	int d = 100;
+
+	printf("a의 주소 : %p\n", &a);
+	printf("b의 주소 : %p\n", &b);
+	printf("c의 주소 : %p\n", &c);
+	printf("d의 주소 : %p\n", &d);
+
+	                // [0] [1] [2] [3]
+	int * array[4] = { &a, &b, &c, &d };
     
-	// 하나의 임시 메모리 공간만들어서 거기에 넣어주었다가 다시 대입할 수 있도록 해주어야 합니다.
-
-    // c[10] <- a(10)
-	c = a;
-
-	// a[20] <- b[20]
-	a = b;
-
-	// b[20] <- c[10]
-	b = c;
-
-	printf("a의 값 : %d b의 값 :%d", a, b);
+	// 배열의 주소는 배열의 첫 번째 시작주소입니다.
+	printf("%p\n", array);
+	printf("%p\n", &array[0]);
+	printf("%p\n", &array[1]);
+	printf("%p\n", &array[2]);
+	printf("%p\n", &array[3]);
 	*/
 
-	// 참조에 의한 호출
-	/*
-	int num1 = 10;
-	int num2 = 20;
+	// 최소값과 최댓값 구하기
+    /*
+	int array[5] = { 0, };
+	int value = 0;
 
-	Swap(&num1, &num2);
-	
-	printf("num1 = %d  num2 = %d\n", num1, num2);
-	*/
+	int min = 100000;
+	int max = 0;
 
-	// const 매개변수 함수 호출
-	/*
-	Const_Funciton(0, 0);
-	*/
-
-	// [???]-[???]-[???]
-
-	int a[10] = {0,};
-
-	// 문제
-	// a라는 배열 공간에 각각의 원소의 수에 맞는 값을 넣어주세요.
-	// ex) [0] = 0 [1] = 1
-
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		a[i] = i;
-		printf("%d\n", a[i]); 
+		scanf_s("%d", &value);
+		array[i] = value;
+
+		if (array[i] >= max)
+		{
+			max = array[i];
+		}
+		     
+		if (array[i] <= min)
+		{
+			min = array[i];
+		}
 	}
 
+	printf("최대값 : %d | 최소값 : %d", max, min);
+	*/
 
+	// 2차원 배열
+	int double_array [2][3] =
+	{ 
+		{1, 2, 5}, // 1 행 
+		{3, 10, 15}  // 2 행 
+	};
+
+	// 2중 for문을 이용해서 2차원 배열에 있는 값을 출력해주세요.
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			printf("2차원 %d 행에 %d 열의 배열 값 : %d\n", i, j, double_array[i][j]);
+		}
+
+		printf("\n");
+	}
 
 	return 0;
 }
