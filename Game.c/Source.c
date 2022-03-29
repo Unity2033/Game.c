@@ -1,74 +1,83 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
+#include <string.h> // 문자열 함수를 사용하기 위한 헤더 파일입니다.
+
 
 int main()
 {
-	// 포인터 배열 
-    /*
-	int a = 10;
-	int b = 20;
-	int c = 15;
-	int d = 100;
+	// 문자열 : 가장 끝에 NULL 문자가 포함됩니다.
+	/*
 
-	printf("a의 주소 : %p\n", &a);
-	printf("b의 주소 : %p\n", &b);
-	printf("c의 주소 : %p\n", &c);
-	printf("d의 주소 : %p\n", &d);
-
-	                // [0] [1] [2] [3]
-	int * array[4] = { &a, &b, &c, &d };
+	          // [A] [B] [C] [D] [E] [\0] [ ] [ ] [ ] [ ]
+	char character[10] = {'A','B','C','D','E'};
+	
+	printf("%s\n", character);
+	printf("배열의 주소 : %p\n", character);
     
-	// 배열의 주소는 배열의 첫 번째 시작주소입니다.
-	printf("%p\n", array);
-	printf("%p\n", &array[0]);
-	printf("%p\n", &array[1]);
-	printf("%p\n", &array[2]);
-	printf("%p\n", &array[3]);
+
+    // 1byte 포인터 -> // [K] [i] [m] [G] [u] [ ] [ ] [ ] [ ]
+	// value라는 포인터 변수는 문자배열의 시작주소를 가리킵니다.
+    // 상수 지시 포인터로 선언해서 포인터에 접근해서 값을 변경할 수 없도록 설정합니다.
+	const char * value = "KimGeumsoo"; 
+
+	printf("%s", value);
 	*/
 
-	// 최소값과 최댓값 구하기
-    /*
-	int array[5] = { 0, };
-	int value = 0;
+	// 아스키 코드
+	/*
+	char value = 0;
 
-	int min = 100000;
-	int max = 0;
-
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 26; i++)
 	{
-		scanf_s("%d", &value);
-		array[i] = value;
-
-		if (array[i] >= max)
-		{
-			max = array[i];
-		}
-		     
-		if (array[i] <= min)
-		{
-			min = array[i];
-		}
+		value = 'A' + i;
+		printf("%c\n", value);
 	}
-
-	printf("최대값 : %d | 최소값 : %d", max, min);
 	*/
 
-	// 2차원 배열
-	int double_array [2][3] =
-	{ 
-		{1, 2, 5}, // 1 행 
-		{3, 10, 15}  // 2 행 
-	};
+	// 문자열 길이 함수
+	/*
+	// 한글은 유니코드 체계를 사용하기 때문에 2 Byte의 메모리 공간을 가지게 됩니다.
+	char oop[] = "게임";
 
-	// 2중 for문을 이용해서 2차원 배열에 있는 값을 출력해주세요.
-	for (int i = 0; i < 2; i++)
-	{
-		for (int j = 0; j < 3; j++)
-		{
-			printf("2차원 %d 행에 %d 열의 배열 값 : %d\n", i, j, double_array[i][j]);
-		}
+	// 문자열의 길이는 NULL 문자 이전까지의 길이만 계산합니다.
+	printf("%d\n", strlen(oop));
 
-		printf("\n");
-	}
+	// 문자열의 공백도 메모리 공간에 포함됩니다.
+	char name[] = "k i m g e u m s o o";
+
+	printf("name의 문자열 길이 : %d\n", strlen(name));
+
+	// NULL문자를 문자열 사이에 넣게되면 NULL문자 이전 까지만, 출력됩니다.
+	char number[] = "Fi\0rst";
+	
+	printf("number의 문자열 길이 : %d", strlen(number));
+	*/
+
+	// 문자열 연결 함수
+	/*
+	char Forename[] = "geumsoo";
+
+	char Surnname[13] = "kim";
+
+	strcat(Surnname, Forename);
+
+	printf("%s", Surnname);
+	*/
+
+	// 문자열 비교 함수
+	/*
+	// First_Alphabet 문자 배열을 아스키 코드로 변환하면 97 + 97 + 97 = 291이라는 값을 가지게 됩니다.
+	char First_Alphabet [ ] = "aaa";
+
+	// Second_Alphabet 문자 배열을 아스키 코드로 변환하면 97 + 97 + 98 = 292이라는 값을 가지게 됩니다.
+	char Second_Alphabet[] = "aab";
+	           
+	// 첫 번째 문자 배열이 크면 1을 반환하고, 서로 같으면 0을 반환합니다.
+	// 두 번째 문자 배열이 크면 -1을 반환합니다.
+	printf("%d",strcmp(First_Alphabet, Second_Alphabet));
+	*/
+
 
 	return 0;
 }
