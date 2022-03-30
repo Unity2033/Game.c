@@ -2,82 +2,131 @@
 
 #include <stdio.h>
 #include <string.h> // 문자열 함수를 사용하기 위한 헤더 파일입니다.
+#include <math.h> // 수학 라이브러리 
+
+// 지역 변수
+// { } 내에서 선언된 변수이며, { }를 벗어나면 메모리에서 사라지는 특징을 가집니다.
+/*
+void Function()
+{
+	// Function 함수라는 지역에서 거주하고 있는 x 변수가 생성됩니다.
+    int x = 100;
+}
+*/
+
+// 전역 변수
+// 함수 외부에서 선언된 변수로 어디에서든지 접근이 가능하며, 프로그램이 종료되어야만 메모리에서 사라지는 특징을 가집니다.
+/*
+int value = 10;
+
+void Global()
+{
+	value++;
+}
+*/
+
+// 정적 변수
+// 지역 변수와 전역 변수의 특징을 다 가지고 있는 변수입니다.
+/*
+void Static()
+{
+	// 정적 변수는 초기화를 하지 않으면 0이라는 값이 들어갑니다.
+	static int value;
+	value++;
+	printf("value의 값 : %d\n", value);
+	printf("static value의 주소 : %p\n", &value);
+}
+*/
+
+// union
+/*
+union Block 
+{
+	char a; // 1 byte
+	int b;  // 4 byte 
+	float c; // 4 byte
+};
+*/
+
+// 구조체
+//struct Player
+//{
+//	int x;
+//	int y;
+//};
+//
+//struct Monster
+//{
+//	int x;
+//	int y;
+//};
+
 
 
 int main()
 {
-	// 문자열 : 가장 끝에 NULL 문자가 포함됩니다.
-	/*
+	// 문자열 복사 함수
+    /*
+	char color [10];
+	char black [6] = { 'B','l','a','c','k' };
 
-	          // [A] [B] [C] [D] [E] [\0] [ ] [ ] [ ] [ ]
-	char character[10] = {'A','B','C','D','E'};
-	
-	printf("%s\n", character);
-	printf("배열의 주소 : %p\n", character);
-    
+	strcpy(color, black);
 
-    // 1byte 포인터 -> // [K] [i] [m] [G] [u] [ ] [ ] [ ] [ ]
-	// value라는 포인터 변수는 문자배열의 시작주소를 가리킵니다.
-    // 상수 지시 포인터로 선언해서 포인터에 접근해서 값을 변경할 수 없도록 설정합니다.
-	const char * value = "KimGeumsoo"; 
-
-	printf("%s", value);
+	printf("%s", color);
 	*/
 
-	// 아스키 코드
+	// 지역 변수
 	/*
-	char value = 0;
+	int x = 3; // main 지역에서 거주하는 x 변수입니다.
 
-	for (int i = 0; i < 26; i++)
-	{
-		value = 'A' + i;
-		printf("%c\n", value);
+	// 지역 생성
+	{ 
+		int x = 10;  // 새로운 지역에서 거주하는 x 변수입니다.
 	}
+
+	Function();
+
+	printf("x의 값 : %d", x);
 	*/
 
-	// 문자열 길이 함수
+	// 전역 변수
 	/*
-	// 한글은 유니코드 체계를 사용하기 때문에 2 Byte의 메모리 공간을 가지게 됩니다.
-	char oop[] = "게임";
-
-	// 문자열의 길이는 NULL 문자 이전까지의 길이만 계산합니다.
-	printf("%d\n", strlen(oop));
-
-	// 문자열의 공백도 메모리 공간에 포함됩니다.
-	char name[] = "k i m g e u m s o o";
-
-	printf("name의 문자열 길이 : %d\n", strlen(name));
-
-	// NULL문자를 문자열 사이에 넣게되면 NULL문자 이전 까지만, 출력됩니다.
-	char number[] = "Fi\0rst";
-	
-	printf("number의 문자열 길이 : %d", strlen(number));
+	Global();
+	printf("전역 변수 : %d", value);
 	*/
 
-	// 문자열 연결 함수
+	// 정적 변수
 	/*
-	char Forename[] = "geumsoo";
-
-	char Surnname[13] = "kim";
-
-	strcat(Surnname, Forename);
-
-	printf("%s", Surnname);
+	Static();
+	Static();
+	Static();
 	*/
 
-	// 문자열 비교 함수
+	// 레지스터 변수
 	/*
-	// First_Alphabet 문자 배열을 아스키 코드로 변환하면 97 + 97 + 97 = 291이라는 값을 가지게 됩니다.
-	char First_Alphabet [ ] = "aaa";
+	register int value = 100;
 
-	// Second_Alphabet 문자 배열을 아스키 코드로 변환하면 97 + 97 + 98 = 292이라는 값을 가지게 됩니다.
-	char Second_Alphabet[] = "aab";
-	           
-	// 첫 번째 문자 배열이 크면 1을 반환하고, 서로 같으면 0을 반환합니다.
-	// 두 번째 문자 배열이 크면 -1을 반환합니다.
-	printf("%d",strcmp(First_Alphabet, Second_Alphabet));
+	printf("%d", value);
 	*/
 
+	// union
+	/*
+	union Block block = {'A'};
+
+	printf("Block a의 값 : %c\n", block.a); 
+	printf("Block b의 값 : %d\n", block.b);
+	printf("Block c의 값 : %f\n", block.c);
+
+	printf("Block의 사이즈 : %d", sizeof(block));
+	*/
+
+	// 구조체         
+	//struct Player player = { 10, 45 };
+
+	//printf("Player x의 좌표 : %d\n", Player.x);
+	//printf("Player y의 좌표 : %d", Player.y);
+
+	printf("%d", pow(10, 2));
 
 	return 0;
 }
