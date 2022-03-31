@@ -1,132 +1,99 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <stdio.h>
-#include <string.h> // 문자열 함수를 사용하기 위한 헤더 파일입니다.
-#include <math.h> // 수학 라이브러리 
+#include <math.h> // 수학 함수를 사용하기 위한 라이브러리
 
-// 지역 변수
-// { } 내에서 선언된 변수이며, { }를 벗어나면 메모리에서 사라지는 특징을 가집니다.
+// 두 점 사이의 거리
 /*
-void Function()
+struct Character
 {
-	// Function 함수라는 지역에서 거주하고 있는 x 변수가 생성됩니다.
-    int x = 100;
-}
-*/
+	int x;
+	int y;
+};
 
-// 전역 변수
-// 함수 외부에서 선언된 변수로 어디에서든지 접근이 가능하며, 프로그램이 종료되어야만 메모리에서 사라지는 특징을 가집니다.
-/*
-int value = 10;
-
-void Global()
+struct Monster
 {
-	value++;
-}
-*/
-
-// 정적 변수
-// 지역 변수와 전역 변수의 특징을 다 가지고 있는 변수입니다.
-/*
-void Static()
-{
-	// 정적 변수는 초기화를 하지 않으면 0이라는 값이 들어갑니다.
-	static int value;
-	value++;
-	printf("value의 값 : %d\n", value);
-	printf("static value의 주소 : %p\n", &value);
-}
-*/
-
-// union
-/*
-union Block 
-{
-	char a; // 1 byte
-	int b;  // 4 byte 
-	float c; // 4 byte
+	int x;
+	int y;
 };
 */
 
 // 구조체
-//struct Player
-//{
-//	int x;
-//	int y;
-//};
-//
-//struct Monster
-//{
-//	int x;
-//	int y;
-//};
+/*
+struct Data
+{
+	char character; // 1 byte 
+	int integer;    // 4 byte
+	float value;    // 4 byte
+};
+*/
 
-
+// 자기 참조 구조체
+/*
+struct Bus
+{
+	char array[10];
+	int value;
+	struct Bus * Next; // 자기 자신을 참조할 수 있도록 포인터 변수를 생성합니다.
+};
+*/
 
 int main()
 {
-	// 문자열 복사 함수
-    /*
-	char color [10];
-	char black [6] = { 'B','l','a','c','k' };
-
-	strcpy(color, black);
-
-	printf("%s", color);
-	*/
-
-	// 지역 변수
+	// 구조체  
 	/*
-	int x = 3; // main 지역에서 거주하는 x 변수입니다.
+	// 구조체는 선언을 했을 때 메모리 공간을 가지게 됩니다.
+	struct Data data;
 
-	// 지역 생성
-	{ 
-		int x = 10;  // 새로운 지역에서 거주하는 x 변수입니다.
-	}
+	// 멤버 연산자 (.)을 통해서 구조체 멤버에 있는 데이터에 접근해서 값을 초기화할 수 있습니다.
+	
+	data.character = 'a';
+	data.integer = 10;
+	data.value = 88.56;
 
-	Function();
-
-	printf("x의 값 : %d", x);
+	printf("Data의 character : %c\n", data.character);
+	printf("Data의 interger : %d\n", data.integer);
+	printf("Data의 value : %f", data.value);
 	*/
 
-	// 전역 변수
+	// 두 점 사이의 거리 
 	/*
-	Global();
-	printf("전역 변수 : %d", value);
+	// Character와 Monster 구조체를 생성하고 x, y의 값을 초기화합니다.
+	struct Character wizard = { 0, 0 };
+	struct Monster Orc = { 2, 3 };
+
+    // 피타고라의 정리를 이용해서 wizard의 좌표값과 Orc의 좌표값을 서로 빼고 제곱을 합니다.
+	int X_Distance = pow(wizard.x - Orc.x,2);
+	int Y_Distance = pow(wizard.y - Orc.y,2);
+
+	// float라는 변수를 생성해서 √ X_Distance + Y_Distance 계산합니다.
+	float result = sqrt(X_Distance + Y_Distance);
+
+	printf("몬스터와 나와의 거리 : %f", result);
 	*/
 
-	// 정적 변수
+	// 자기 참조 구조체
 	/*
-	Static();
-	Static();
-	Static();
+	struct Bus A = { 10, "A 정거장",NULL};
+	struct Bus B = { 20, "B 정거장",NULL };
+	struct Bus C = { 30, "C 정거장",NULL };
+
+	// A라는 구조체의 멤버 변수의 구조체 포인터는 B라는 구조체의 시작주소를 가리킵니다.
+	A.Next = &B;
+
+	// B라는 구조체의 멤버 변수의 구조체 포인터는 C라는 구조체의 시작주소를 가리킵니다.
+	B.Next = &C;
+
+	// 더 이상 가리킬 주소가 없다면 NULL을 저장합니다.
+	C.Next = NULL;
+
+	printf("A의 value : %d\n", A.value);
+
+	// A.Next는 다음 주소를 가리킬 수 있기 때문에 -> 로 B의 멤버 변수의 값에 접근할 수 있습니다.
+	printf("B의 value : %d\n", A.Next->value = 1000);
+	printf("B의 value : %s\n", A.Next->array);
+
+
+	printf("C의 value : %d", B.Next->value);
 	*/
-
-	// 레지스터 변수
-	/*
-	register int value = 100;
-
-	printf("%d", value);
-	*/
-
-	// union
-	/*
-	union Block block = {'A'};
-
-	printf("Block a의 값 : %c\n", block.a); 
-	printf("Block b의 값 : %d\n", block.b);
-	printf("Block c의 값 : %f\n", block.c);
-
-	printf("Block의 사이즈 : %d", sizeof(block));
-	*/
-
-	// 구조체         
-	//struct Player player = { 10, 45 };
-
-	//printf("Player x의 좌표 : %d\n", Player.x);
-	//printf("Player y의 좌표 : %d", Player.y);
-
-	printf("%d", pow(10, 2));
 
 	return 0;
 }
