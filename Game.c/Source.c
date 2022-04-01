@@ -1,100 +1,129 @@
 #include <stdio.h>
-#include <math.h> // 수학 함수를 사용하기 위한 라이브러리
 
-// 두 점 사이의 거리
+// 구조체 바이트 패딩
 /*
-struct Character
+struct value
 {
-	int x;
-	int y;
+	char a; // 1 byte 
+	char b; // 1 byte
+	char c; // 1 byte
 };
 
-struct Monster
-{
-	int x;
-	int y;
-};
-*/
-
-// 구조체
-/*
+// CPU가 연산을 할 때 4 바이트씩 읽는데 끊어지지 않게 하기 위해 4 / 4 / 4 로 패딩을 추가합니다.
 struct Data
 {
-	char character; // 1 byte 
-	int integer;    // 4 byte
-	float value;    // 4 byte
+	// k는 1 byte이지만, CPU가 읽을 때 한번에 읽을 수 있도록 3 byte의 패딩이 추가가 되었습니다.
+	// m은 1 byte이지만, CPU가 읽을 때 한번에 읽을 수 있도록 3 byte의 패딩이 추가가 되었습니다.
+
+	// [k][pa][pa][pa] / [i][i][i][i] / [m][pa][pa][pa]
+
+	int i;  // 4 byte 
+	char k; // 1 byte + padding 3 byte
+	char m; // 1 byte + padding 3 byte 
+
+	// [i][i][i][i] 
+	// [k][m][pa][pa]
+    
+	// 구조체의 크기는 멤버 변수의 순서에 따라 크기가 달라집니다.
 };
 */
 
-// 자기 참조 구조체
+// 비트 필드
 /*
-struct Bus
+struct Bit 
 {
-	char array[10];
-	int value;
-	struct Bus * Next; // 자기 자신을 참조할 수 있도록 포인터 변수를 생성합니다.
+	char x; // 1 byte
+	char y; // 1 byte
+};
+
+struct Byte
+{
+	// 비트 필드를 사용할 때 변수의 이름을 생략해서 사용할 수 있습니다.
+
+	char h : 3; // 1 byte  [] [] []
+	char n : 2; // 1 byte     [] []
+
+    // [n] [h] [h] [h] [h] [h] [h] [h]
+	// [ ] [ ] [ ] [ ] [ ] [ ] [n] [n] 
+};
+*/
+
+// 열거체 
+/*
+enum Map
+{
+   Village,
+   Battle,
+   Sea,
+   Heaven,
 };
 */
 
 int main()
 {
-	// 구조체  
+    // 구조체 바이트 패딩
 	/*
-	// 구조체는 선언을 했을 때 메모리 공간을 가지게 됩니다.
-	struct Data data;
+	printf("구조체 value의 크기 : %d\n", sizeof(struct value));
+	printf("구조체 Data의 크기 : %d\n", sizeof(struct Data));
+	*/
 
-	// 멤버 연산자 (.)을 통해서 구조체 멤버에 있는 데이터에 접근해서 값을 초기화할 수 있습니다.
+	// 비트 필드
+	/*
+	printf("Bit 구조체의 크기 : %d\n", sizeof(struct Bit));
+	printf("Byte 구조체의 크기 : %d\n", sizeof(struct Byte));
+	*/
+
+	// 약수
+	/*
+	int value = 0;
+
+	scanf_s("%d", &value);
+
+	for (int i = 1; i <= value; i++)
+	{
+		if (value % i == 0)
+		{
+			printf("value의 약수 : %d\n", i);
+		}
+	}
+	*/
+
+	// 열거체
+    /*
+	// while문을 이용해서 내가 원하는 번호를 누르면 원하는 위치에 이동할 수 있도록 만들어 보세요.
+
+	enum Map number = 0;
+	int value = 0;
+
+	while (1)	
+	{
+		printf("0.마을  1.결투장  2.바다  3.부활 신전");
+		scanf_s("%d", &value);
+
+		number = value;
+
+		switch (number)
+		{
+		case Village:
+			printf("마을에 도착했습니다.\n");
+			break;
+		case Battle:
+			printf("결투장에 도착했습니다.\n");
+			break;
+		case Sea:
+			printf("바다에 도착했습니다.\n");
+			break;
+		case Heaven:
+			printf("부활 신전에 도착했습니다.\n");
+			break;
+		default:
+			printf("다시 입력해주세요.\n");
+			break;
+		}
+		
+	}
+	*/
 	
-	data.character = 'a';
-	data.integer = 10;
-	data.value = 88.56;
-
-	printf("Data의 character : %c\n", data.character);
-	printf("Data의 interger : %d\n", data.integer);
-	printf("Data의 value : %f", data.value);
-	*/
-
-	// 두 점 사이의 거리 
-	/*
-	// Character와 Monster 구조체를 생성하고 x, y의 값을 초기화합니다.
-	struct Character wizard = { 0, 0 };
-	struct Monster Orc = { 2, 3 };
-
-    // 피타고라의 정리를 이용해서 wizard의 좌표값과 Orc의 좌표값을 서로 빼고 제곱을 합니다.
-	int X_Distance = pow(wizard.x - Orc.x,2);
-	int Y_Distance = pow(wizard.y - Orc.y,2);
-
-	// float라는 변수를 생성해서 √ X_Distance + Y_Distance 계산합니다.
-	float result = sqrt(X_Distance + Y_Distance);
-
-	printf("몬스터와 나와의 거리 : %f", result);
-	*/
-
-	// 자기 참조 구조체
-	/*
-	struct Bus A = { 10, "A 정거장",NULL};
-	struct Bus B = { 20, "B 정거장",NULL };
-	struct Bus C = { 30, "C 정거장",NULL };
-
-	// A라는 구조체의 멤버 변수의 구조체 포인터는 B라는 구조체의 시작주소를 가리킵니다.
-	A.Next = &B;
-
-	// B라는 구조체의 멤버 변수의 구조체 포인터는 C라는 구조체의 시작주소를 가리킵니다.
-	B.Next = &C;
-
-	// 더 이상 가리킬 주소가 없다면 NULL을 저장합니다.
-	C.Next = NULL;
-
-	printf("A의 value : %d\n", A.value);
-
-	// A.Next는 다음 주소를 가리킬 수 있기 때문에 -> 로 B의 멤버 변수의 값에 접근할 수 있습니다.
-	printf("B의 value : %d\n", A.Next->value = 1000);
-	printf("B의 value : %s\n", A.Next->array);
-
-
-	printf("C의 value : %d", B.Next->value);
-	*/
-
 	return 0;
 }
 
