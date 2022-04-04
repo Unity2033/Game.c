@@ -20,6 +20,8 @@ void Const_Funciton(const int x, const int y)
 }
 */
 
+// main 함수
+
     // 변수의 값을 교환하는 방법
 	/*
 	int a = 10;

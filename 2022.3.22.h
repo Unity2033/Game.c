@@ -1,5 +1,7 @@
 #pragma once
 
+// main ÇÔ¼ö
+
 // continue ¹®
 /*
 for (int i = 1; i <= 10; i++)

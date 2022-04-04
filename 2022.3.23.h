@@ -1,5 +1,7 @@
 #pragma once
 
+// main 함수
+
     // 포인터
 	/*
 	// value라는 메모리 공간을 생성했습니다.

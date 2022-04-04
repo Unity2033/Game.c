@@ -1,4 +1,7 @@
 #pragma once
+#include <string.h>
+
+// main 함수
 
 // 문자열 : 가장 끝에 NULL 문자가 포함됩니다.
 	/*

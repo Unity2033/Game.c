@@ -1,5 +1,7 @@
 #pragma once
 
+// main 함수
+
     // 포인터 배열 
 	/*
 	int a = 10;

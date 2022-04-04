@@ -44,6 +44,8 @@ union Block
 };
 */
 
+// main 함수
+
 // 문자열 복사 함수
 /*
 char color [10];

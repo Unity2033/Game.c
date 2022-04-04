@@ -17,6 +17,8 @@ void Mul(int x, int y);
 float Div(int x, int y);
 */
 
+// main 함수
+
 // 상수 지시 포인터 
 /*
 int value = 10;
@@ -41,6 +43,8 @@ Mul(1, 3);
 float f = Div(3, 2);
 printf("Div : %f", f);
 */
+
+// return 
 
 // 함수
 /*
