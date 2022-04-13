@@ -1,73 +1,81 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h> 
+#include <conio.h>
+#include <windows.h>
+
+void Load_Text(const char * text) // 텍스트 파일을 불러오는 함수
+{
+	FILE* file = fopen(text, "r"); // 외부에 있는 텍스트 파일을 r(읽기) 모드로 열기
+	char buffer[10000] = { 0, };
+
+	// buffer = char 배열
+	// 1 = 크기를 가지는 배열을 가리키는 포인터 
+	// 10000 = 읽어들일 원소의 크기로 단위는 바이트이며, size가 4 이면 하나의 원소의 크기는 4 바이트이다.
+	// file = 데이터를 입력받을 스트림의 FILE 객체를 가리키는 포인터
+
+	fread(buffer, 1, 10000, file); // 전체 읽기
+	printf("%s", buffer);
+
+	fclose(file); // 파일 닫기
+}
 
 int main()
-{	 
-	// 10진수의 수를 2진수로 변환
+{
+	// 파일 쓰기
 	/*
+	// master 텍스트파일을 w(쓰기) 모드로 열기
+	FILE * file = fopen("master.txt", "w");
+
+	fputs("MP : 100\n", file);
+	fputs("Attack : 10\n", file);
+
+	// 파일 포인터를 열고 나면 마지막에는 닫아주어야 합니다.
+	fclose(file);
+	*/
+
+	// 파일 읽기
+	/*
+	// master파일을 r(읽기) 모드로 열기
+	FILE* read = fopen("Resources/Start.txt","r");
+	
+	char buffer[10000] = { 0, };
+
+	// buffer = char 배열
+    // 1 = 크기를 가지는 배열을 가리키는 포인터 
+    // 10000 = 읽어들일 원소의 크기로 단위는 바이트이며, size가 4 이면 하나의 원소의           크기는 4 바이트이다.
+    // file = 데이터를 입력받을 스트림의 FILE 객체를 가리키는 포인터
+
+	fread(buffer, 1, 10000, read); // 전체 읽기
+
+	printf("%s", buffer);
+
+	fclose(read); // 파일 포인터 닫기
+	*/
+
+
 	int value = 0;
 
-	int array[8] = {0,}; // [0] [0] [0] [0] [0] [0] [0] [0]
-
-	int count = 0;
-
-	scanf_s("%d", &value);
-
-	
-	while (value > 0) 
+	while (1)
 	{
-		if (value % 2 == 0)
-		{
-			for (int i = count; i < count + 1; i++)
-			{
-				array[i] = 0;
-			}
+		scanf_s("%d", &value);
 
-			count++;
-		}
-		else 
-		{
-			for (int i = count; i < count + 1; i++)
-			{
-				array[i] = 1;
-			}
+		system("cls");
 
-			count++;
+		switch (value)
+		{
+		case 0:
+			Load_Text("Resources/Air.txt");
+			break;
+		case 1:
+			Load_Text("Resources/Car.txt");
+			break;
+		case 2:
+			Load_Text("Resources/G.txt");
+			break;
 		}
 
-		value = value / 2;
+
 	}
-
-
-	for (int i = 7; 0 <= i; i--)
-	{
-		printf("%d  ", array[i]);
-	}
-	*/
-	
-	// 최소 공배수
-	/*
-	int num1 = 0;
-	int num2 = 0;
-
-	int num1_R = 0;
-	int num2_R = 0;
-	int gcd = 0;
-	
-	scanf_s("%d  %d", &num1, &num2);
-	
-	for (int i = 1; i <= num1 && i <= num2; i++)
-	{
-		if (num1 % i == 0 && num2 % i == 0)
-		{
-			num1_R = num1 / i;
-			num2_R = num2 / i;
-
-			gcd = i;
-		}
-	}
-
-	printf("%d", gcd * num1_R * num2_R);
-	*/
 
 	return 0;
 
