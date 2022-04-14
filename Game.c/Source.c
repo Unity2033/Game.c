@@ -2,83 +2,84 @@
 #include <stdio.h> 
 #include <conio.h>
 #include <windows.h>
+#include <mmsystem.h>
 
-void Load_Text(const char * text) // 텍스트 파일을 불러오는 함수
+#pragma comment(lib,"winmm.lib")
+
+void Size(int width, int Height)
 {
-	FILE* file = fopen(text, "r"); // 외부에 있는 텍스트 파일을 r(읽기) 모드로 열기
-	char buffer[10000] = { 0, };
+	// sprintf() = 출력하는 결과 값을 변수에 저장하는 함수입니다.
+	// cols=%d(가로), lines=%d(세로)
+	// system() = Windows CMD 명령문을 실행하는 함수로 화면의 크기를 나타냅니다.
 
-	// buffer = char 배열
-	// 1 = 크기를 가지는 배열을 가리키는 포인터 
-	// 10000 = 읽어들일 원소의 크기로 단위는 바이트이며, size가 4 이면 하나의 원소의 크기는 4 바이트이다.
-	// file = 데이터를 입력받을 스트림의 FILE 객체를 가리키는 포인터
+	char command[100]; // Window CMD 명령어를 담을 문자 배열입니다.
 
-	fread(buffer, 1, 10000, file); // 전체 읽기
-	printf("%s", buffer);
+	sprintf(command, "mode con: cols=%d lines=%d", width, Height);
+	system(command);
+}
 
-	fclose(file); // 파일 닫기
+void FullScreen()
+{
+	SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, 0);
+}
+
+void Typing(const char * text)
+{
+	int i = 0;
+           
+	while (text[i] != 0)
+	{
+		printf("%c", text[i++]);
+		fflush(stdout);
+		Sleep(250);
+	}
 }
 
 int main()
 {
-	// 파일 쓰기
+	// PlaySound
 	/*
-	// master 텍스트파일을 w(쓰기) 모드로 열기
-	FILE * file = fopen("master.txt", "w");
-
-	fputs("MP : 100\n", file);
-	fputs("Attack : 10\n", file);
-
-	// 파일 포인터를 열고 나면 마지막에는 닫아주어야 합니다.
-	fclose(file);
-	*/
-
-	// 파일 읽기
-	/*
-	// master파일을 r(읽기) 모드로 열기
-	FILE* read = fopen("Resources/Start.txt","r");
-	
-	char buffer[10000] = { 0, };
-
-	// buffer = char 배열
-    // 1 = 크기를 가지는 배열을 가리키는 포인터 
-    // 10000 = 읽어들일 원소의 크기로 단위는 바이트이며, size가 4 이면 하나의 원소의           크기는 4 바이트이다.
-    // file = 데이터를 입력받을 스트림의 FILE 객체를 가리키는 포인터
-
-	fread(buffer, 1, 10000, read); // 전체 읽기
-
-	printf("%s", buffer);
-
-	fclose(read); // 파일 포인터 닫기
-	*/
-
-
-	int value = 0;
+	// 파일경로와 이름
+	// SND_FILENAME | SND_ASYNC  일반 재생
+	// SND_FILENAME | SND_ASYNC | SND_LOOP 반복 재생
+	// PlaySound함수는 Wav 파일만 재생시킵니다.
+	PlaySound(TEXT("Sound.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP ); //루프 재생
 
 	while (1)
 	{
-		scanf_s("%d", &value);
-
-		system("cls");
-
-		switch (value)
+		if (GetAsyncKeyState(VK_SPACE))
 		{
-		case 0:
-			Load_Text("Resources/Air.txt");
-			break;
-		case 1:
-			Load_Text("Resources/Car.txt");
-			break;
-		case 2:
-			Load_Text("Resources/G.txt");
 			break;
 		}
+	}
+	*/
 
+	// 소수() 판별 알고리즘 
+	// 입력을 했을 때 입력한 값이 소수이면 소수입니다. 아니면 소수가 아닙니다.
 
+	int value = 0;
+	int count = 0;
+
+	scanf_s("%d", &value);
+
+	for (int i = 2; i < value; i++)
+	{
+		if (value % i == 0)
+		{
+			count++;
+		}
+	}
+
+	if (count == 0)
+	{
+		printf("소수입니다.");
+	}
+	else
+	{
+		printf("소수가 아닙니다.");
 	}
 
 	return 0;
-
 }
 
 
