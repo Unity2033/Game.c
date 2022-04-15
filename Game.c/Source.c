@@ -2,85 +2,96 @@
 #include <stdio.h> 
 #include <conio.h>
 #include <windows.h>
-#include <mmsystem.h>
 
-#pragma comment(lib,"winmm.lib")
-
-void Size(int width, int Height)
+int map[10][10] =
 {
-	// sprintf() = 출력하는 결과 값을 변수에 저장하는 함수입니다.
-	// cols=%d(가로), lines=%d(세로)
-	// system() = Windows CMD 명령문을 실행하는 함수로 화면의 크기를 나타냅니다.
+	{1,1,1,1,1,1,1,1,1,1},
+	{1,0,0,1,1,0,0,0,0,1},
+	{1,0,0,0,1,0,0,0,0,1},
+	{1,0,0,0,1,0,0,0,0,1},
+	{1,1,1,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,1,1,1,1,0,1},
+	{1,0,0,0,1,0,0,0,0,1},
+	{1,0,0,0,1,0,0,0,0,1},
+	{1,1,1,1,1,1,1,1,1,1}
+};
 
-	char command[100]; // Window CMD 명령어를 담을 문자 배열입니다.
-
-	sprintf(command, "mode con: cols=%d lines=%d", width, Height);
-	system(command);
+void gotoxy(int x, int y)
+{
+	COORD pos = { x,y }; // x, y 좌표 설정
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos); // 좌표 위치 이동 
 }
 
-void FullScreen()
+void Village()
 {
-	SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, 0);
-}
-
-void Typing(const char * text)
-{
-	int i = 0;
-           
-	while (text[i] != 0)
+	for (int i = 0; i < 10; i++)
 	{
-		printf("%c", text[i++]);
-		fflush(stdout);
-		Sleep(250);
+		for (int j = 0; j < 10; j++)
+		{
+			if (map[i][j] == 1)
+			{
+				printf("■");
+			}
+			else if (map[i][j] == 0)
+			{
+				printf("  ");
+			}
+		}
+
+		printf("\n");
 	}
 }
 
 int main()
 {
-	// PlaySound
-	/*
-	// 파일경로와 이름
-	// SND_FILENAME | SND_ASYNC  일반 재생
-	// SND_FILENAME | SND_ASYNC | SND_LOOP 반복 재생
-	// PlaySound함수는 Wav 파일만 재생시킵니다.
-	PlaySound(TEXT("Sound.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP ); //루프 재생
+	int key;
+	int x = 1, y= 1;
 
 	while (1)
-	{
-		if (GetAsyncKeyState(VK_SPACE))
+	{	
+		printf("x의 : %d y : %d\n", x, y);
+		Village();
+
+		gotoxy(x, y);
+		printf("♠");
+
+		key = _getch();
+
+		switch (key)
 		{
-			break;
+			case 72: y--;
+				break;
+			case 75: x--;
+				break;
+			case 77: x++;
+				break;
+			case 80: y++;
+				break;
+			default:
+				break;
 		}
-	}
-	*/
 
-	// 소수() 판별 알고리즘 
-	// 입력을 했을 때 입력한 값이 소수이면 소수입니다. 아니면 소수가 아닙니다.
-
-	int value = 0;
-	int count = 0;
-
-	scanf_s("%d", &value);
-
-	for (int i = 2; i < value; i++)
-	{
-		if (value % i == 0)
+		// 웹 사이트 이동 
+		if (GetAsyncKeyState(VK_BACK))
 		{
-			count++;
-		}
-	}
+			system("start https://www.naver.com/");
 
-	if (count == 0)
-	{
-		printf("소수입니다.");
-	}
-	else
-	{
-		printf("소수가 아닙니다.");
+		}
+
+		// 일시 정지 
+		if (GetAsyncKeyState(VK_RETURN))
+		{
+			system("pause");
+		}
+
+		system("cls");
 	}
 
 	return 0;
 }
+
+
 
 
 
