@@ -3,15 +3,16 @@
 #include <conio.h>
 #include <windows.h>
 
-int map[10][10] =
+
+int map[10][10] = 
 {
 	{1,1,1,1,1,1,1,1,1,1},
 	{1,0,0,1,1,0,0,0,0,1},
 	{1,0,0,0,1,0,0,0,0,1},
-	{1,0,0,0,1,0,0,0,0,1},
-	{1,1,1,0,0,0,0,0,0,1},
+	{1,0,1,0,0,0,0,0,0,1},
+	{1,1,1,1,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,1,1,1,1,0,1},
+	{1,0,0,0,0,1,1,1,0,1},
 	{1,0,0,0,1,0,0,0,0,1},
 	{1,0,0,0,1,0,0,0,0,1},
 	{1,1,1,1,1,1,1,1,1,1}
@@ -23,19 +24,19 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos); // 좌표 위치 이동 
 }
 
-void Village()
+void Village() 
 {
 	for (int i = 0; i < 10; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 10; j++) 
 		{
-			if (map[i][j] == 1)
-			{
+			if (map[j][i] == 1)
+			{				
 				printf("■");
 			}
-			else if (map[i][j] == 0)
+			else if(map[j][i] == 0)
 			{
-				printf("  ");
+				printf("  "); 
 			}
 		}
 
@@ -43,30 +44,39 @@ void Village()
 	}
 }
 
+
 int main()
 {
-	int key;
-	int x = 1, y= 1;
+	int key; 
+    int x = 2, y= 2;
 
 	while (1)
 	{	
-		printf("x의 : %d y : %d\n", x, y);
 		Village();
 
 		gotoxy(x, y);
-		printf("♠");
-
-		key = _getch();
+		
+		printf("★");
+	
+		key = _getch(); 
 
 		switch (key)
 		{
-			case 72: y--;
+			case 72 :
+				if (map[x / 2][y-1] == 1) break; 
+				 y--;		 
 				break;
-			case 75: x--;
+			case 75 : 
+				if (map[x / 2 - 1][y] == 1) break; 
+				x -= 2;
 				break;
-			case 77: x++;
-				break;
-			case 80: y++;
+			case 77 : 
+				if (map[x / 2 + 1][y] == 1) break;	
+                x += 2; 
+				break; 
+			case 80 : 
+				if (map[x / 2][y + 1] == 1) break;
+				y++; 
 				break;
 			default:
 				break;
@@ -76,10 +86,9 @@ int main()
 		if (GetAsyncKeyState(VK_BACK))
 		{
 			system("start https://www.naver.com/");
-
 		}
 
-		// 일시 정지 
+		//// 일시 정지 
 		if (GetAsyncKeyState(VK_RETURN))
 		{
 			system("pause");
