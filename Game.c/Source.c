@@ -5,9 +5,11 @@
 #include <time.h>
 
 int array[9] = { 0, };
-char quest[9] = { '?', };
+char quest[9] = { '?','?','?','?','?','?','?','?','?'};
 
 int x = 2, y = 2;
+int count = -1;
+int value = 0;
 
 void gotoxy(int x, int y)
 {
@@ -60,10 +62,16 @@ void Quest_Render()
 {
 	printf("\n");
 
-	for (int i = 0; i < 9; i++)
-	{
-		quest[i] = '?';
-		printf("  %c\t", quest[i]);
+	for (int i = 0; i <= 9; i++)
+	{	
+		if (quest[i] == '?')
+		{
+			printf("  %c\t", quest[i]);
+		}
+		else
+		{
+			printf("  %d\t", array[i]);
+		}
 
 		if (i % 3 == 2)
 		{
@@ -80,7 +88,7 @@ int main()
 
 	Render();
 
-	Sleep(3000);
+	Sleep(1000);
 	system("cls");
 
 	while (1)
@@ -107,6 +115,26 @@ int main()
 		case 80:
 			if (y >= 6) break;
 			y += 3;
+			break;
+		case 32:
+			value = x + y;
+
+			switch (value)
+			{
+			case 4 :
+				count = 0;
+				break;
+			case 12:
+				count = 1;
+				break;
+			case 7:
+				count = 3;
+				break;
+			}
+
+			if (count < 0) break;
+			
+		    quest[count] = count;
 			break;
 		default:
 			break;
